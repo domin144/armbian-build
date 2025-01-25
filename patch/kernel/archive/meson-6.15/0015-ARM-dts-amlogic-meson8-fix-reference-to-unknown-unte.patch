@@ -1,0 +1,52 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Sun, 20 Apr 2025 17:45:22 +0200
+Subject: ARM: dts: amlogic: meson8: fix reference to unknown/untested PWM
+ clock
+
+Device-tree expects absent clocks to be specified as <0> (instead of
+using <>). This fixes using the FCLK4/FCLK3 clocks as they are now
+seen at their correct index (while before they were recognized, but at
+the correct index - resulting in the hardware using a different clock
+than what the kernel sees).
+
+Fixes: 802cff460aab ("ARM: dts: amlogic: meson8: switch to the new PWM controller binding")
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ arch/arm/boot/dts/amlogic/meson8.dtsi | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/amlogic/meson8.dtsi b/arch/arm/boot/dts/amlogic/meson8.dtsi
+index 111111111111..222222222222 100644
+--- a/arch/arm/boot/dts/amlogic/meson8.dtsi
++++ b/arch/arm/boot/dts/amlogic/meson8.dtsi
+@@ -451,7 +451,7 @@ analog_top: analog-top@81a8 {
+ 	pwm_ef: pwm@86c0 {
+ 		compatible = "amlogic,meson8-pwm-v2";
+ 		clocks = <&xtal>,
+-			 <>, /* unknown/untested, the datasheet calls it "Video PLL" */
++			 <0>, /* unknown/untested, the datasheet calls it "Video PLL" */
+ 			 <&clkc CLKID_FCLK_DIV4>,
+ 			 <&clkc CLKID_FCLK_DIV3>;
+ 		reg = <0x86c0 0x10>;
+@@ -705,7 +705,7 @@ timer@600 {
+ &pwm_ab {
+ 	compatible = "amlogic,meson8-pwm-v2";
+ 	clocks = <&xtal>,
+-		 <>, /* unknown/untested, the datasheet calls it "Video PLL" */
++		 <0>, /* unknown/untested, the datasheet calls it "Video PLL" */
+ 		 <&clkc CLKID_FCLK_DIV4>,
+ 		 <&clkc CLKID_FCLK_DIV3>;
+ };
+@@ -713,7 +713,7 @@ &pwm_ab {
+ &pwm_cd {
+ 	compatible = "amlogic,meson8-pwm-v2";
+ 	clocks = <&xtal>,
+-		 <>, /* unknown/untested, the datasheet calls it "Video PLL" */
++		 <0>, /* unknown/untested, the datasheet calls it "Video PLL" */
+ 		 <&clkc CLKID_FCLK_DIV4>,
+ 		 <&clkc CLKID_FCLK_DIV3>;
+ };
+-- 
+Armbian
+

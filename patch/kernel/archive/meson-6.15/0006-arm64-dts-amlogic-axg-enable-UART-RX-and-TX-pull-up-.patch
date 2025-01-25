@@ -1,0 +1,78 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Sat, 29 Mar 2025 19:17:10 +0100
+Subject: arm64: dts: amlogic: axg: enable UART RX and TX pull up by default
+
+Some boards have noise on the UART RX line when the UART pins are not
+connected to another device (such as an USB UART adapter). This can
+be addressed by using a pull up resistor. Not all boards may provide
+such a pull up resistor on the PCB so enable the SoC's pull-up on the
+UART RX and TX pads by default. This matches the default (from u-boot
+or SoC hardware) state for the pinmux configuration on these pads.
+
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ arch/arm64/boot/dts/amlogic/meson-axg.dtsi | 12 +++++-----
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/amlogic/meson-axg.dtsi b/arch/arm64/boot/dts/amlogic/meson-axg.dtsi
+index 111111111111..222222222222 100644
+--- a/arch/arm64/boot/dts/amlogic/meson-axg.dtsi
++++ b/arch/arm64/boot/dts/amlogic/meson-axg.dtsi
+@@ -1164,7 +1164,7 @@ mux {
+ 						groups = "uart_tx_a",
+ 							 "uart_rx_a";
+ 						function = "uart_a";
+-						bias-disable;
++						bias-pull-up;
+ 					};
+ 				};
+ 
+@@ -1182,7 +1182,7 @@ mux {
+ 						groups = "uart_tx_b_x",
+ 							 "uart_rx_b_x";
+ 						function = "uart_b";
+-						bias-disable;
++						bias-pull-up;
+ 					};
+ 				};
+ 
+@@ -1200,7 +1200,7 @@ mux {
+ 						groups = "uart_tx_b_z",
+ 							 "uart_rx_b_z";
+ 						function = "uart_b";
+-						bias-disable;
++						bias-pull-up;
+ 					};
+ 				};
+ 
+@@ -1218,7 +1218,7 @@ mux {
+ 						groups = "uart_ao_tx_b_z",
+ 							 "uart_ao_rx_b_z";
+ 						function = "uart_ao_b_z";
+-						bias-disable;
++						bias-pull-up;
+ 					};
+ 				};
+ 
+@@ -1654,7 +1654,7 @@ mux {
+ 						groups = "uart_ao_tx_a",
+ 							 "uart_ao_rx_a";
+ 						function = "uart_ao_a";
+-						bias-disable;
++						bias-pull-up;
+ 					};
+ 				};
+ 
+@@ -1672,7 +1672,7 @@ mux {
+ 						groups = "uart_ao_tx_b",
+ 							 "uart_ao_rx_b";
+ 						function = "uart_ao_b";
+-						bias-disable;
++						bias-pull-up;
+ 					};
+ 				};
+ 
+-- 
+Armbian
+

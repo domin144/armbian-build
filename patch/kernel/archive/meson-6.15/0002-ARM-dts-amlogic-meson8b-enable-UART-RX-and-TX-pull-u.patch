@@ -1,0 +1,42 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Sat, 29 Mar 2025 19:15:37 +0100
+Subject: ARM: dts: amlogic: meson8b: enable UART RX and TX pull up by default
+
+Some boards have noise on the UART RX line when the UART pins are not
+connected to another device (such as an USB UART adapter). This can
+be addressed by using a pull up resistor. Not all boards may provide
+such a pull up resistor on the PCB so enable the SoC's pull-up on the
+UART RX and TX pads by default. This matches the default (from u-boot
+or SoC hardware) state for the pinmux configuration on these pads.
+
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ arch/arm/boot/dts/amlogic/meson8b.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/amlogic/meson8b.dtsi b/arch/arm/boot/dts/amlogic/meson8b.dtsi
+index 111111111111..222222222222 100644
+--- a/arch/arm/boot/dts/amlogic/meson8b.dtsi
++++ b/arch/arm/boot/dts/amlogic/meson8b.dtsi
+@@ -368,7 +368,7 @@ uart_ao_a_pins: uart_ao_a {
+ 			mux {
+ 				groups = "uart_tx_ao_a", "uart_rx_ao_a";
+ 				function = "uart_ao";
+-				bias-disable;
++				bias-pull-up;
+ 			};
+ 		};
+ 
+@@ -521,7 +521,7 @@ mux {
+ 				groups = "uart_tx_b0",
+ 				       "uart_rx_b0";
+ 				function = "uart_b";
+-				bias-disable;
++				bias-pull-up;
+ 			};
+ 		};
+ 
+-- 
+Armbian
+
