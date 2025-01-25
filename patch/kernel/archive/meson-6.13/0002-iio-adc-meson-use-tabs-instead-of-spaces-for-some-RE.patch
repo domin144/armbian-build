@@ -1,0 +1,35 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Tue, 16 Jul 2024 18:06:25 +0200
+Subject: iio: adc: meson: use tabs instead of spaces for some REG11 bit fields
+
+This makes them consistent with the rest of the driver. No functional
+changes.
+
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ drivers/iio/adc/meson_saradc.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/iio/adc/meson_saradc.c b/drivers/iio/adc/meson_saradc.c
+index 111111111111..222222222222 100644
+--- a/drivers/iio/adc/meson_saradc.c
++++ b/drivers/iio/adc/meson_saradc.c
+@@ -155,10 +155,10 @@
+  */
+ #define MESON_SAR_ADC_REG11					0x2c
+ 	#define MESON_SAR_ADC_REG11_BANDGAP_EN			BIT(13)
+-	#define MESON_SAR_ADC_REG11_CMV_SEL                     BIT(6)
+-	#define MESON_SAR_ADC_REG11_VREF_VOLTAGE                BIT(5)
+-	#define MESON_SAR_ADC_REG11_EOC                         BIT(1)
+-	#define MESON_SAR_ADC_REG11_VREF_SEL                    BIT(0)
++	#define MESON_SAR_ADC_REG11_CMV_SEL			BIT(6)
++	#define MESON_SAR_ADC_REG11_VREF_VOLTAGE		BIT(5)
++	#define MESON_SAR_ADC_REG11_EOC				BIT(1)
++	#define MESON_SAR_ADC_REG11_VREF_SEL			BIT(0)
+ 
+ #define MESON_SAR_ADC_REG13					0x34
+ 	#define MESON_SAR_ADC_REG13_12BIT_CALIBRATION_MASK	GENMASK(13, 8)
+-- 
+Armbian
+

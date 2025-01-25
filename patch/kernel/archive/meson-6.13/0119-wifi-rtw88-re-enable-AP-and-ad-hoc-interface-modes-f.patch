@@ -1,0 +1,59 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Thu, 19 Sep 2024 08:32:23 +0200
+Subject: wifi: rtw88: re-enable AP and ad-hoc interface modes for SDIO cards -
+ WiP
+
+Commit faa2e484b393 ("wifi: rtw88: Fix USB/SDIO devices not transmitting
+beacons") and commit 902cb7b11f9a ("wifi: rtw88: assign mac_id for
+vif/sta and update to TX desc") made beaconing work on SDIO cards.
+Now that this is fixed we can re-enable the AP and ah-hoc interface
+modes for SDIO cards.
+
+WiP - is this working?
+
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ drivers/net/wireless/realtek/rtw88/main.c | 12 ++++------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/net/wireless/realtek/rtw88/main.c b/drivers/net/wireless/realtek/rtw88/main.c
+index 111111111111..222222222222 100644
+--- a/drivers/net/wireless/realtek/rtw88/main.c
++++ b/drivers/net/wireless/realtek/rtw88/main.c
+@@ -2228,7 +2228,6 @@ EXPORT_SYMBOL(rtw_core_deinit);
+ 
+ int rtw_register_hw(struct rtw_dev *rtwdev, struct ieee80211_hw *hw)
+ {
+-	bool sta_mode_only = rtwdev->hci.type == RTW_HCI_TYPE_SDIO;
+ 	struct rtw_hal *hal = &rtwdev->hal;
+ 	int max_tx_headroom = 0;
+ 	int ret;
+@@ -2257,12 +2256,9 @@ int rtw_register_hw(struct rtw_dev *rtwdev, struct ieee80211_hw *hw)
+ 	ieee80211_hw_set(hw, TX_AMSDU);
+ 	ieee80211_hw_set(hw, SINGLE_SCAN_ON_ALL_BANDS);
+ 
+-	if (sta_mode_only)
+-		hw->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION);
+-	else
+-		hw->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION) |
+-					     BIT(NL80211_IFTYPE_AP) |
+-					     BIT(NL80211_IFTYPE_ADHOC);
++	hw->wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION) |
++				     BIT(NL80211_IFTYPE_AP) |
++				     BIT(NL80211_IFTYPE_ADHOC);
+ 	hw->wiphy->available_antennas_tx = hal->antenna_tx;
+ 	hw->wiphy->available_antennas_rx = hal->antenna_rx;
+ 
+@@ -2273,7 +2269,7 @@ int rtw_register_hw(struct rtw_dev *rtwdev, struct ieee80211_hw *hw)
+ 	hw->wiphy->max_scan_ssids = RTW_SCAN_MAX_SSIDS;
+ 	hw->wiphy->max_scan_ie_len = rtw_get_max_scan_ie_len(rtwdev);
+ 
+-	if (!sta_mode_only && rtwdev->chip->id == RTW_CHIP_TYPE_8822C) {
++	if (rtwdev->chip->id == RTW_CHIP_TYPE_8822C) {
+ 		hw->wiphy->iface_combinations = rtw_iface_combs;
+ 		hw->wiphy->n_iface_combinations = ARRAY_SIZE(rtw_iface_combs);
+ 	}
+-- 
+Armbian
+

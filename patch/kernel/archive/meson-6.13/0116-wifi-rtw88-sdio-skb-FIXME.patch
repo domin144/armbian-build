@@ -1,0 +1,47 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Sun, 5 May 2024 17:50:07 +0200
+Subject: wifi: rtw88: sdio: skb FIXME
+
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ drivers/net/wireless/realtek/rtw88/sdio.c | 3 ++-
+ drivers/net/wireless/realtek/rtw88/sdio.h | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/realtek/rtw88/sdio.c b/drivers/net/wireless/realtek/rtw88/sdio.c
+index 111111111111..222222222222 100644
+--- a/drivers/net/wireless/realtek/rtw88/sdio.c
++++ b/drivers/net/wireless/realtek/rtw88/sdio.c
+@@ -920,6 +920,7 @@ static int rtw_sdio_tx_write(struct rtw_dev *rtwdev,
+ 
+ 	tx_data = rtw_sdio_get_tx_data(skb);
+ 	tx_data->sn = pkt_info->sn;
++	tx_data->offset = pkt_info->offset;
+ 
+ 	skb_queue_tail(&rtwsdio->tx_queue[queue], skb);
+ 
+@@ -1192,7 +1193,7 @@ static void rtw_sdio_indicate_tx_status(struct rtw_dev *rtwdev,
+ 	struct ieee80211_tx_info *info = IEEE80211_SKB_CB(skb);
+ 	struct ieee80211_hw *hw = rtwdev->hw;
+ 
+-	skb_pull(skb, rtwdev->chip->tx_pkt_desc_sz);
++	skb_pull(skb, rtwdev->chip->tx_pkt_desc_sz + tx_data->offset);
+ 
+ 	/* enqueue to wait for tx report */
+ 	if (info->flags & IEEE80211_TX_CTL_REQ_TX_STATUS) {
+diff --git a/drivers/net/wireless/realtek/rtw88/sdio.h b/drivers/net/wireless/realtek/rtw88/sdio.h
+index 111111111111..222222222222 100644
+--- a/drivers/net/wireless/realtek/rtw88/sdio.h
++++ b/drivers/net/wireless/realtek/rtw88/sdio.h
+@@ -140,6 +140,7 @@ struct sdio_device_id;
+ 
+ struct rtw_sdio_tx_data {
+ 	u8 sn;
++	u8 offset;
+ };
+ 
+ struct rtw_sdio_work_data {
+-- 
+Armbian
+
