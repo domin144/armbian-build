@@ -1573,7 +1573,7 @@ index 000000000000..111111111111
 +
 +static struct platform_driver meson_txc_hdmi_platform_driver = {
 +	.probe		= meson_txc_hdmi_probe,
-+	.remove_new	= meson_txc_hdmi_remove,
++	.remove		= meson_txc_hdmi_remove,
 +	.driver		= {
 +		.name		= "meson-transwitch-hdmi",
 +		.of_match_table	= meson_txc_hdmi_of_table,

@@ -52,7 +52,7 @@ index 111111111111..222222222222 100644
  		goto free_canvas_vd1_2;
  	drm->mode_config.max_width = 3840;
  	drm->mode_config.max_height = 2160;
-+	drm->mode_config.preferred_depth = get_preferred_bpp(drm);
++	drm->mode_config.preferred_depth = get_preferred_bpp(priv);
  	drm->mode_config.funcs = &meson_mode_config_funcs;
  	drm->mode_config.helper_private	= &meson_mode_config_helpers;
  
