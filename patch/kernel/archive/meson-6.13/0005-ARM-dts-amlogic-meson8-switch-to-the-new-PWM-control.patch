@@ -1,0 +1,56 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Wed, 25 Dec 2024 12:13:39 +0100
+Subject: ARM: dts: amlogic: meson8: switch to the new PWM controller binding
+
+Use the new PWM controller binding which now relies on passing all
+clock inputs available on the SoC (instead of passing the "wanted"
+clock input for a given board).
+
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ arch/arm/boot/dts/amlogic/meson8.dtsi | 18 ++++++++--
+ 1 file changed, 15 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/amlogic/meson8.dtsi b/arch/arm/boot/dts/amlogic/meson8.dtsi
+index 111111111111..222222222222 100644
+--- a/arch/arm/boot/dts/amlogic/meson8.dtsi
++++ b/arch/arm/boot/dts/amlogic/meson8.dtsi
+@@ -449,7 +449,11 @@ analog_top: analog-top@81a8 {
+ 	};
+ 
+ 	pwm_ef: pwm@86c0 {
+-		compatible = "amlogic,meson8-pwm", "amlogic,meson8b-pwm";
++		compatible = "amlogic,meson8-pwm-v2";
++		clocks = <&xtal>,
++			 <>, /* unknown/untested, the datasheet calls it "Video PLL" */
++			 <&clkc CLKID_FCLK_DIV4>,
++			 <&clkc CLKID_FCLK_DIV3>;
+ 		reg = <0x86c0 0x10>;
+ 		#pwm-cells = <3>;
+ 		status = "disabled";
+@@ -699,11 +703,19 @@ timer@600 {
+ };
+ 
+ &pwm_ab {
+-	compatible = "amlogic,meson8-pwm", "amlogic,meson8b-pwm";
++	compatible = "amlogic,meson8-pwm-v2";
++	clocks = <&xtal>,
++		 <>, /* unknown/untested, the datasheet calls it "Video PLL" */
++		 <&clkc CLKID_FCLK_DIV4>,
++		 <&clkc CLKID_FCLK_DIV3>;
+ };
+ 
+ &pwm_cd {
+-	compatible = "amlogic,meson8-pwm", "amlogic,meson8b-pwm";
++	compatible = "amlogic,meson8-pwm-v2";
++	clocks = <&xtal>,
++		 <>, /* unknown/untested, the datasheet calls it "Video PLL" */
++		 <&clkc CLKID_FCLK_DIV4>,
++		 <&clkc CLKID_FCLK_DIV3>;
+ };
+ 
+ &rtc {
+-- 
+Armbian
+

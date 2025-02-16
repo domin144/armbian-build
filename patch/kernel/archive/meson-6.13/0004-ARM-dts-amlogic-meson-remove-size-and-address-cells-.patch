@@ -1,0 +1,43 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Date: Wed, 25 Dec 2024 12:28:52 +0100
+Subject: ARM: dts: amlogic: meson: remove size and address cells from USB
+ nodes
+
+The only board that actually requires these properties is
+meson8b-odroidc1.dts but that already sets it on it's own. Drop these
+properties from meson.dtsi because otherwise they can cause dtc
+warnings:
+  /soc/usb@c9040000: unnecessary #address-cells/#size-cells without
+  "ranges", "dma-ranges" or child "reg" property
+
+Signed-off-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+---
+ arch/arm/boot/dts/amlogic/meson.dtsi | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/arch/arm/boot/dts/amlogic/meson.dtsi b/arch/arm/boot/dts/amlogic/meson.dtsi
+index 111111111111..222222222222 100644
+--- a/arch/arm/boot/dts/amlogic/meson.dtsi
++++ b/arch/arm/boot/dts/amlogic/meson.dtsi
+@@ -255,8 +255,6 @@ rtc: rtc@740 {
+ 
+ 		usb0: usb@c9040000 {
+ 			compatible = "snps,dwc2";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			reg = <0xc9040000 0x40000>;
+ 			interrupts = <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>;
+ 			phys = <&usb0_phy>;
+@@ -270,8 +268,6 @@ usb0: usb@c9040000 {
+ 
+ 		usb1: usb@c90c0000 {
+ 			compatible = "snps,dwc2";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			reg = <0xc90c0000 0x40000>;
+ 			interrupts = <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>;
+ 			phys = <&usb1_phy>;
+-- 
+Armbian
+
