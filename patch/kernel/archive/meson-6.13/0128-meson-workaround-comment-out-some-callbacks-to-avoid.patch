@@ -1,0 +1,52 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Dominik=20W=C3=B3jt?= <domin144@o2.pl>
+Date: Sat, 1 Mar 2025 12:52:10 +0100
+Subject: meson: workaround: comment out some callbacks to avoid crash
+
+On MXQ tv box clone, when changing resolution from 1920x1200 to
+1920x1080, desktop disappears and following error is printed by kernel:
+	[  785.121784] Unable to handle kernel NULL pointer dereference at virtual address 00000000 when read
+	[  785.128311] [00000000] *pgd=00000000
+	[  785.131731] Internal error: Oops: 5 [#1] SMP ARM
+	(...)
+	[  785.610772] Call trace:
+	[  785.610783]  drm_default_rgb_quant_range from drm_atomic_helper_connector_hdmi_check+0xa8/0x6b0
+	[  785.621977]  drm_atomic_helper_connector_hdmi_check from drm_atomic_helper_check_modeset+0x4e8/0xda8
+	[  785.631093]  drm_atomic_helper_check_modeset from drm_atomic_helper_check+0x10/0x8c
+	[  785.638734]  drm_atomic_helper_check from drm_atomic_check_only+0x690/0xa90
+	[  785.645682]  drm_atomic_check_only from drm_atomic_commit+0x84/0x100
+	[  785.652021]  drm_atomic_commit from drm_atomic_helper_set_config+0x88/0xc0
+	[  785.658881]  drm_atomic_helper_set_config from drm_mode_setcrtc+0x204/0x808
+	[  785.665829]  drm_mode_setcrtc from drm_ioctl+0x2a8/0x4ec
+	[  785.671126]  drm_ioctl from sys_ioctl+0x4d4/0xc60
+	[  785.675816]  sys_ioctl from ret_fast_syscall+0x0/0x54
+	[  785.680851] Exception stack(0xf1ec1fa8 to 0xf1ec1ff0)
+
+When looking through the patches from xdarklight repository, these
+callbacks looked similar to the functions in the callstack, so I
+commented them out. Luckily with those callbacks commented out, the
+crash is no longer observed.
+---
+ drivers/gpu/drm/display/drm_bridge_connector.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/display/drm_bridge_connector.c b/drivers/gpu/drm/display/drm_bridge_connector.c
+index 111111111111..222222222222 100644
+--- a/drivers/gpu/drm/display/drm_bridge_connector.c
++++ b/drivers/gpu/drm/display/drm_bridge_connector.c
+@@ -352,10 +352,10 @@ static int drm_bridge_connector_atomic_check(struct drm_connector *connector,
+ 
+ static const struct drm_connector_helper_funcs drm_bridge_connector_helper_funcs = {
+ 	.get_modes = drm_bridge_connector_get_modes,
+-	.mode_valid = drm_bridge_connector_mode_valid,
++	/* .mode_valid = drm_bridge_connector_mode_valid, */
+ 	.enable_hpd = drm_bridge_connector_enable_hpd,
+ 	.disable_hpd = drm_bridge_connector_disable_hpd,
+-	.atomic_check = drm_bridge_connector_atomic_check,
++	/* .atomic_check = drm_bridge_connector_atomic_check, */
+ };
+ 
+ static enum drm_mode_status
+-- 
+Armbian
+
