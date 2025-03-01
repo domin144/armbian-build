@@ -28,7 +28,7 @@ diff --git a/drivers/gpu/drm/bridge/ite-it66121.c b/drivers/gpu/drm/bridge/ite-i
 index 111111111111..222222222222 100644
 --- a/drivers/gpu/drm/bridge/ite-it66121.c
 +++ b/drivers/gpu/drm/bridge/ite-it66121.c
-@@ -1464,7 +1464,6 @@ static const struct hdmi_codec_ops it66121_audio_codec_ops = {
+@@ -1466,7 +1466,6 @@ static const struct hdmi_codec_ops it66121_audio_codec_ops = {
  	.audio_shutdown = it66121_audio_shutdown,
  	.mute_stream = it66121_audio_mute,
  	.get_eld = it66121_audio_get_eld,
@@ -36,7 +36,7 @@ index 111111111111..222222222222 100644
  };
  
  static int it66121_audio_codec_init(struct it66121_ctx *ctx, struct device *dev)
-@@ -1474,6 +1473,7 @@ static int it66121_audio_codec_init(struct it66121_ctx *ctx, struct device *dev)
+@@ -1476,6 +1475,7 @@ static int it66121_audio_codec_init(struct it66121_ctx *ctx, struct device *dev)
  		.i2s = 1, /* Only i2s support for now */
  		.spdif = 0,
  		.max_i2s_channels = 8,
@@ -68,7 +68,7 @@ diff --git a/drivers/gpu/drm/exynos/exynos_hdmi.c b/drivers/gpu/drm/exynos/exyno
 index 111111111111..222222222222 100644
 --- a/drivers/gpu/drm/exynos/exynos_hdmi.c
 +++ b/drivers/gpu/drm/exynos/exynos_hdmi.c
-@@ -1658,7 +1658,6 @@ static const struct hdmi_codec_ops audio_codec_ops = {
+@@ -1660,7 +1660,6 @@ static const struct hdmi_codec_ops audio_codec_ops = {
  	.audio_shutdown = hdmi_audio_shutdown,
  	.mute_stream = hdmi_audio_mute,
  	.get_eld = hdmi_audio_get_eld,
@@ -76,7 +76,7 @@ index 111111111111..222222222222 100644
  };
  
  static int hdmi_register_audio_device(struct hdmi_context *hdata)
-@@ -1667,6 +1666,7 @@ static int hdmi_register_audio_device(struct hdmi_context *hdata)
+@@ -1669,6 +1668,7 @@ static int hdmi_register_audio_device(struct hdmi_context *hdata)
  		.ops = &audio_codec_ops,
  		.max_i2s_channels = 6,
  		.i2s = 1,
@@ -168,7 +168,7 @@ diff --git a/drivers/gpu/drm/sti/sti_hdmi.c b/drivers/gpu/drm/sti/sti_hdmi.c
 index 111111111111..222222222222 100644
 --- a/drivers/gpu/drm/sti/sti_hdmi.c
 +++ b/drivers/gpu/drm/sti/sti_hdmi.c
-@@ -1235,7 +1235,6 @@ static const struct hdmi_codec_ops audio_codec_ops = {
+@@ -1237,7 +1237,6 @@ static const struct hdmi_codec_ops audio_codec_ops = {
  	.audio_shutdown = hdmi_audio_shutdown,
  	.mute_stream = hdmi_audio_mute,
  	.get_eld = hdmi_audio_get_eld,
@@ -176,7 +176,7 @@ index 111111111111..222222222222 100644
  };
  
  static int sti_hdmi_register_audio_driver(struct device *dev,
-@@ -1245,6 +1244,7 @@ static int sti_hdmi_register_audio_driver(struct device *dev,
+@@ -1247,6 +1246,7 @@ static int sti_hdmi_register_audio_driver(struct device *dev,
  		.ops = &audio_codec_ops,
  		.max_i2s_channels = 8,
  		.i2s = 1,

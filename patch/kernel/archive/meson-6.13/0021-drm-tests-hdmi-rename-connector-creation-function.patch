@@ -19,7 +19,7 @@ diff --git a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c b/drivers/gpu/dr
 index 111111111111..222222222222 100644
 --- a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
 +++ b/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
-@@ -164,9 +164,9 @@ static const struct drm_connector_funcs dummy_connector_funcs = {
+@@ -170,9 +170,9 @@ static const struct drm_connector_funcs dummy_connector_funcs = {
  
  static
  struct drm_atomic_helper_connector_hdmi_priv *
@@ -32,7 +32,7 @@ index 111111111111..222222222222 100644
  {
  	struct drm_atomic_helper_connector_hdmi_priv *priv;
  	struct drm_connector *conn;
-@@ -247,9 +247,9 @@ static void drm_test_check_broadcast_rgb_crtc_mode_changed(struct kunit *test)
+@@ -253,9 +253,9 @@ static void drm_test_check_broadcast_rgb_crtc_mode_changed(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -45,7 +45,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	ctx = drm_kunit_helper_acquire_ctx_alloc(test);
-@@ -310,9 +310,9 @@ static void drm_test_check_broadcast_rgb_crtc_mode_not_changed(struct kunit *tes
+@@ -316,9 +316,9 @@ static void drm_test_check_broadcast_rgb_crtc_mode_not_changed(struct kunit *tes
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -58,7 +58,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	ctx = drm_kunit_helper_acquire_ctx_alloc(test);
-@@ -373,9 +373,9 @@ static void drm_test_check_broadcast_rgb_auto_cea_mode(struct kunit *test)
+@@ -379,9 +379,9 @@ static void drm_test_check_broadcast_rgb_auto_cea_mode(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -71,7 +71,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -429,9 +429,9 @@ static void drm_test_check_broadcast_rgb_auto_cea_mode_vic_1(struct kunit *test)
+@@ -435,9 +435,9 @@ static void drm_test_check_broadcast_rgb_auto_cea_mode_vic_1(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -84,7 +84,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	drm = &priv->drm;
-@@ -485,9 +485,9 @@ static void drm_test_check_broadcast_rgb_full_cea_mode(struct kunit *test)
+@@ -491,9 +491,9 @@ static void drm_test_check_broadcast_rgb_full_cea_mode(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -97,7 +97,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -543,9 +543,9 @@ static void drm_test_check_broadcast_rgb_full_cea_mode_vic_1(struct kunit *test)
+@@ -549,9 +549,9 @@ static void drm_test_check_broadcast_rgb_full_cea_mode_vic_1(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -110,7 +110,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	drm = &priv->drm;
-@@ -601,9 +601,9 @@ static void drm_test_check_broadcast_rgb_limited_cea_mode(struct kunit *test)
+@@ -607,9 +607,9 @@ static void drm_test_check_broadcast_rgb_limited_cea_mode(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -123,7 +123,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -659,9 +659,9 @@ static void drm_test_check_broadcast_rgb_limited_cea_mode_vic_1(struct kunit *te
+@@ -665,9 +665,9 @@ static void drm_test_check_broadcast_rgb_limited_cea_mode_vic_1(struct kunit *te
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -136,7 +136,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	drm = &priv->drm;
-@@ -719,9 +719,9 @@ static void drm_test_check_output_bpc_crtc_mode_changed(struct kunit *test)
+@@ -725,9 +725,9 @@ static void drm_test_check_output_bpc_crtc_mode_changed(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -149,7 +149,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -793,9 +793,9 @@ static void drm_test_check_output_bpc_crtc_mode_not_changed(struct kunit *test)
+@@ -799,9 +799,9 @@ static void drm_test_check_output_bpc_crtc_mode_not_changed(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -162,7 +162,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -862,11 +862,11 @@ static void drm_test_check_output_bpc_dvi(struct kunit *test)
+@@ -868,11 +868,11 @@ static void drm_test_check_output_bpc_dvi(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -179,7 +179,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -911,9 +911,9 @@ static void drm_test_check_tmds_char_rate_rgb_8bpc(struct kunit *test)
+@@ -917,9 +917,9 @@ static void drm_test_check_tmds_char_rate_rgb_8bpc(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -192,7 +192,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -958,9 +958,9 @@ static void drm_test_check_tmds_char_rate_rgb_10bpc(struct kunit *test)
+@@ -964,9 +964,9 @@ static void drm_test_check_tmds_char_rate_rgb_10bpc(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -205,7 +205,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1005,9 +1005,9 @@ static void drm_test_check_tmds_char_rate_rgb_12bpc(struct kunit *test)
+@@ -1011,9 +1011,9 @@ static void drm_test_check_tmds_char_rate_rgb_12bpc(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -218,7 +218,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1056,9 +1056,9 @@ static void drm_test_check_hdmi_funcs_reject_rate(struct kunit *test)
+@@ -1062,9 +1062,9 @@ static void drm_test_check_hdmi_funcs_reject_rate(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -231,7 +231,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	ctx = drm_kunit_helper_acquire_ctx_alloc(test);
-@@ -1112,9 +1112,9 @@ static void drm_test_check_max_tmds_rate_bpc_fallback(struct kunit *test)
+@@ -1118,9 +1118,9 @@ static void drm_test_check_max_tmds_rate_bpc_fallback(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -244,7 +244,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1179,11 +1179,11 @@ static void drm_test_check_max_tmds_rate_format_fallback(struct kunit *test)
+@@ -1185,11 +1185,11 @@ static void drm_test_check_max_tmds_rate_format_fallback(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -261,7 +261,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1242,11 +1242,11 @@ static void drm_test_check_output_bpc_format_vic_1(struct kunit *test)
+@@ -1248,11 +1248,11 @@ static void drm_test_check_output_bpc_format_vic_1(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -278,7 +278,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	drm = &priv->drm;
-@@ -1305,9 +1305,9 @@ static void drm_test_check_output_bpc_format_driver_rgb_only(struct kunit *test)
+@@ -1311,9 +1311,9 @@ static void drm_test_check_output_bpc_format_driver_rgb_only(struct kunit *test)
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -291,7 +291,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1370,11 +1370,11 @@ static void drm_test_check_output_bpc_format_display_rgb_only(struct kunit *test
+@@ -1376,11 +1376,11 @@ static void drm_test_check_output_bpc_format_display_rgb_only(struct kunit *test
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -308,7 +308,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1438,9 +1438,9 @@ static void drm_test_check_output_bpc_format_driver_8bpc_only(struct kunit *test
+@@ -1444,9 +1444,9 @@ static void drm_test_check_output_bpc_format_driver_8bpc_only(struct kunit *test
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -321,7 +321,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1496,11 +1496,11 @@ static void drm_test_check_output_bpc_format_display_8bpc_only(struct kunit *tes
+@@ -1502,11 +1502,11 @@ static void drm_test_check_output_bpc_format_display_8bpc_only(struct kunit *tes
  	struct drm_crtc *crtc;
  	int ret;
  
@@ -338,7 +338,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1593,9 +1593,9 @@ static void drm_test_check_broadcast_rgb_value(struct kunit *test)
+@@ -1599,9 +1599,9 @@ static void drm_test_check_broadcast_rgb_value(struct kunit *test)
  	struct drm_connector_state *conn_state;
  	struct drm_connector *conn;
  
@@ -351,7 +351,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1615,9 +1615,9 @@ static void drm_test_check_bpc_8_value(struct kunit *test)
+@@ -1621,9 +1621,9 @@ static void drm_test_check_bpc_8_value(struct kunit *test)
  	struct drm_connector_state *conn_state;
  	struct drm_connector *conn;
  
@@ -364,7 +364,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1639,9 +1639,9 @@ static void drm_test_check_bpc_10_value(struct kunit *test)
+@@ -1645,9 +1645,9 @@ static void drm_test_check_bpc_10_value(struct kunit *test)
  	struct drm_connector_state *conn_state;
  	struct drm_connector *conn;
  
@@ -377,7 +377,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1663,9 +1663,9 @@ static void drm_test_check_bpc_12_value(struct kunit *test)
+@@ -1669,9 +1669,9 @@ static void drm_test_check_bpc_12_value(struct kunit *test)
  	struct drm_connector_state *conn_state;
  	struct drm_connector *conn;
  
@@ -390,7 +390,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1685,11 +1685,11 @@ static void drm_test_check_format_value(struct kunit *test)
+@@ -1691,11 +1691,11 @@ static void drm_test_check_format_value(struct kunit *test)
  	struct drm_connector_state *conn_state;
  	struct drm_connector *conn;
  
@@ -407,7 +407,7 @@ index 111111111111..222222222222 100644
  	KUNIT_ASSERT_NOT_NULL(test, priv);
  
  	conn = &priv->connector;
-@@ -1707,11 +1707,11 @@ static void drm_test_check_tmds_char_value(struct kunit *test)
+@@ -1713,11 +1713,11 @@ static void drm_test_check_tmds_char_value(struct kunit *test)
  	struct drm_connector_state *conn_state;
  	struct drm_connector *conn;
  

@@ -369,8 +369,8 @@ diff --git a/drivers/usb/host/xhci-pci.c b/drivers/usb/host/xhci-pci.c
 index 111111111111..222222222222 100644
 --- a/drivers/usb/host/xhci-pci.c
 +++ b/drivers/usb/host/xhci-pci.c
-@@ -653,6 +653,9 @@ static const struct pci_device_id pci_ids_reject[] = {
- 	/* handled by xhci-pci-renesas */
+@@ -653,6 +653,9 @@ EXPORT_SYMBOL_NS_GPL(xhci_pci_common_probe, "xhci");
+ static const struct pci_device_id pci_ids_renesas[] = {
  	{ PCI_DEVICE(PCI_VENDOR_ID_RENESAS, 0x0014) },
  	{ PCI_DEVICE(PCI_VENDOR_ID_RENESAS, 0x0015) },
 +	/* handled by xhci-pci-etron */

@@ -52,7 +52,7 @@ diff --git a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c b/drivers/gpu/dr
 index 111111111111..222222222222 100644
 --- a/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
 +++ b/drivers/gpu/drm/tests/drm_hdmi_state_helper_test.c
-@@ -124,6 +124,18 @@ static const struct drm_connector_hdmi_funcs reject_connector_hdmi_funcs = {
+@@ -131,6 +131,18 @@ static const struct drm_connector_hdmi_funcs reject_connector_hdmi_funcs = {
  	.tmds_char_rate_valid	= reject_connector_tmds_char_rate_valid,
  };
  
@@ -71,7 +71,7 @@ index 111111111111..222222222222 100644
  static int dummy_connector_get_modes(struct drm_connector *connector)
  {
  	struct drm_atomic_helper_connector_hdmi_priv *priv =
-@@ -146,6 +158,7 @@ static int dummy_connector_get_modes(struct drm_connector *connector)
+@@ -153,6 +165,7 @@ static int dummy_connector_get_modes(struct drm_connector *connector)
  static const struct drm_connector_helper_funcs dummy_connector_helper_funcs = {
  	.atomic_check	= drm_atomic_helper_connector_hdmi_check,
  	.get_modes	= dummy_connector_get_modes,
@@ -79,7 +79,7 @@ index 111111111111..222222222222 100644
  };
  
  static void dummy_hdmi_connector_reset(struct drm_connector *connector)
-@@ -163,9 +176,10 @@ static const struct drm_connector_funcs dummy_connector_funcs = {
+@@ -170,9 +183,10 @@ static const struct drm_connector_funcs dummy_connector_funcs = {
  
  static
  struct drm_atomic_helper_connector_hdmi_priv *
@@ -93,7 +93,7 @@ index 111111111111..222222222222 100644
  {
  	struct drm_atomic_helper_connector_hdmi_priv *priv;
  	struct drm_connector *conn;
-@@ -207,7 +221,7 @@ drm_kunit_helper_connector_hdmi_init(struct kunit *test,
+@@ -214,7 +228,7 @@ drm_kunit_helper_connector_hdmi_init(struct kunit *test,
  	ret = drmm_connector_hdmi_init(drm, conn,
  				       "Vendor", "Product",
  				       &dummy_connector_funcs,
@@ -102,7 +102,7 @@ index 111111111111..222222222222 100644
  				       DRM_MODE_CONNECTOR_HDMIA,
  				       NULL,
  				       formats,
-@@ -219,7 +233,24 @@ drm_kunit_helper_connector_hdmi_init(struct kunit *test,
+@@ -226,7 +240,24 @@ drm_kunit_helper_connector_hdmi_init(struct kunit *test,
  
  	drm_mode_config_reset(drm);
  
@@ -128,7 +128,7 @@ index 111111111111..222222222222 100644
  				 test_edid_hdmi_1080p_rgb_max_200mhz,
  				 ARRAY_SIZE(test_edid_hdmi_1080p_rgb_max_200mhz));
  	KUNIT_ASSERT_GT(test, ret, 0);
-@@ -1733,9 +1764,148 @@ static struct kunit_suite drm_atomic_helper_connector_hdmi_reset_test_suite = {
+@@ -1740,9 +1771,148 @@ static struct kunit_suite drm_atomic_helper_connector_hdmi_reset_test_suite = {
  	.test_cases	= drm_atomic_helper_connector_hdmi_reset_tests,
  };
  
