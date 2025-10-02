@@ -26,6 +26,10 @@ case $BRANCH in
 	current)
 		declare -g KERNEL_MAJOR_MINOR="6.12"
 		;;
+
+	edge)
+		declare -g KERNEL_MAJOR_MINOR="6.16"
+		;;
 esac
 
 family_tweaks_bsp() {

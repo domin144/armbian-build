@@ -1,0 +1,55 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Binbin Zhou <zhoubinbin@loongson.cn>
+Date: Tue, 3 Jun 2025 20:26:12 +0800
+Subject: mmc: meson-mx-sdhc: Use devm_mmc_alloc_host() helper
+
+Use new function devm_mmc_alloc_host() to simplify the code.
+
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Kevin Hilman <khilman@baylibre.com>
+Cc: Jerome Brunet <jbrunet@baylibre.com>
+Cc: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
+Cc: linux-amlogic@lists.infradead.org
+Reviewed-by: Huacai Chen <chenhuacai@loongson.cn>
+Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
+---
+ drivers/mmc/host/meson-mx-sdhc-mmc.c | 13 +---------
+ 1 file changed, 1 insertion(+), 12 deletions(-)
+
+diff --git a/drivers/mmc/host/meson-mx-sdhc-mmc.c b/drivers/mmc/host/meson-mx-sdhc-mmc.c
+index 111111111111..222222222222 100644
+--- a/drivers/mmc/host/meson-mx-sdhc-mmc.c
++++ b/drivers/mmc/host/meson-mx-sdhc-mmc.c
+@@ -757,11 +757,6 @@ static void meson_mx_sdhc_init_hw(struct mmc_host *mmc)
+ 	regmap_write(host->regmap, MESON_SDHC_ISTA, MESON_SDHC_ISTA_ALL_IRQS);
+ }
+ 
+-static void meason_mx_mmc_free_host(void *data)
+-{
+-       mmc_free_host(data);
+-}
+-
+ static int meson_mx_sdhc_probe(struct platform_device *pdev)
+ {
+ 	struct device *dev = &pdev->dev;
+@@ -770,16 +765,10 @@ static int meson_mx_sdhc_probe(struct platform_device *pdev)
+ 	void __iomem *base;
+ 	int ret, irq;
+ 
+-	mmc = mmc_alloc_host(sizeof(*host), dev);
++	mmc = devm_mmc_alloc_host(dev, sizeof(*host));
+ 	if (!mmc)
+ 		return -ENOMEM;
+ 
+-	ret = devm_add_action_or_reset(dev, meason_mx_mmc_free_host, mmc);
+-	if (ret) {
+-		dev_err(dev, "Failed to register mmc_free_host action\n");
+-		return ret;
+-	}
+-
+ 	host = mmc_priv(mmc);
+ 	host->mmc = mmc;
+ 
+-- 
+Armbian
+
